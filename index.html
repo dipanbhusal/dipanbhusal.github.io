@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Portfolio site</title>
+        <style>
+            body{
+                margin:0;
+                padding: 0;
+
+            }
+            #information{
+                text-align: center;
+                width: 100%;
+                flex : 30%;
+                background-color: rgba(247, 247, 247, 0.975);
+
+            }
+            #user-image{
+                width: 100%;
+            }
+            #repo-info{
+                height:auto;
+                float: right;
+                margin-left: 30px;
+                flex: 60%;
+                background-color: rgba(247, 247, 247, 0.975);
+
+            }
+            #rows{
+                display: flex;
+            }
+            a{
+                text-decoration: none;
+                color: rgb(58, 4, 109);
+            }
+            a:hover{
+                color: rgb(132, 97, 213);
+            }
+          
+         
+         @media screen and (max-width: 700px){
+             #rows{
+                 flex-direction: column;
+             }
+             #user-image{
+                 width: 100%;
+             }
+         }
+        </style>
+    </head>
+    <body>
+        <div id = "rows">
+        <div id="information" class="column">
+            
+                <img  id="user-image">
+        
+            <h3>I am <span id="username"></span></h3>
+            <p id="bio"></p>
+        
+            <div>Followers: <span id="followers"></span></div>
+            Following: <span id="following"></span>
+
+        </div>
+        <div id="repo-info" class="column">
+            <h2>Here are my Github Repositories: </h2>
+            <div id = "repos">
+                <div id="each-repo">
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+       <script>
+           fetch('https://api.github.com/users/dipanbhusal')
+           .then(response => response.json())
+           .then(function(info){
+            
+            document.getElementById('username').textContent = info['name'];
+            document.getElementById('bio').textContent = info['bio'];
+            document.getElementById('followers').textContent = info['followers'];
+            document.getElementById('following').textContent = info['following'];
+            document.getElementById('user-image').src = info['avatar_url'];
+           });
+           
+
+           fetch('https://api.github.com/users/dipanbhusal/repos')
+           .then(response => response.json())
+           .then(function(info){
+            const repoInfo =   document.getElementById('repos'); 
+            for(i=0; i < info.length; i++) {
+                let repoName =  info[i]['name'];
+                let repoUrl = info[i]['html_url'];
+                
+                let repoNameInfo = document.createElement('div')
+                let repoUrlInfo = document.createElement('div');
+                repoNameInfo.className = 'repo-name'
+                repoUrlInfo.className  ='repo-url';
+                repoNameInfo.innerHTML = `<h3>Repo Name: ${repoName} </h3>`;
+                repoUrlInfo.innerHTML = `Link Of Repo: <a href="${repoUrl}">Link</a> `;
+
+                document.getElementById('each-repo').appendChild(repoNameInfo);
+                document.getElementById('each-repo').appendChild(repoUrlInfo);
+                repoUrlInfo.style.cssText ="border-bottom : 2px solid burlywood;";
+                  
+            }
+           })
+       </script>
+    </body>
+</html>
