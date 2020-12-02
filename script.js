@@ -82,3 +82,4 @@ var typed_2 = new Typed("#typed_2", {
        
     });
     
+
