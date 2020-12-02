@@ -78,6 +78,7 @@ body{
     color: #ffffff;
 }
 .toggle-button{
+    z-index: 1;
     background-color: none;
     color: var(--color-black);
     position: fixed;
@@ -88,6 +89,7 @@ body{
 }
 
 .toggle-left{
+    z-index: 1;
     left : 0px!important;
     width: 1000px!important;
 }
