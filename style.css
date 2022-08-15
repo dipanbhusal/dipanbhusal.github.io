@@ -6,7 +6,7 @@ body{
     
 }
 :root{
-    --color-black : #8B0000;
+    --color-black : #1a1b1b;
     --color-white : #ffffff;
     --color-border : #222222;
     --font-staat : 'Staatliches', cursive;
@@ -146,3 +146,5 @@ a:hover{
         display:none;
     }
 }
+
+
